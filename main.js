@@ -4,6 +4,7 @@ let dateInput = document.getElementById("dateInput");
 let descInput = document.getElementById("descInput");
 let error = document.getElementById("error");
 let mainCard = document.getElementById("mainCard");
+let add = document.getElementById("add");
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -17,6 +18,11 @@ let formValidation = () => {
     } else {
         error.innerHTML = "";
         acceptData();
+        add.setAttribute("data-bs-dismiss","modal");
+        add.click();
+        (() => {
+            add.setAttribute("data-bs-dismiss","");
+        })();
     }
 }
 
@@ -43,4 +49,11 @@ let createDate = () => {
         </div>
     </div>
     `
+    resetForm();
+}
+
+let resetForm = () => {
+    titleInput.value = "";
+    dateInput.value = "";
+    descInput.value = "";
 }
