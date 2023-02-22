@@ -1,0 +1,30 @@
+#add-task {
+    background-color: tomato;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid tomato;
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px #c4c4c4;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: all 0.2s ease;
+}
+
+#add-task:hover {
+    opacity: 1;
+}
+
+.options {
+    gap: 10px;
+    cursor: pointer;
+}
+
+#error {
+    color: red;
+    font-size: 12.5px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
