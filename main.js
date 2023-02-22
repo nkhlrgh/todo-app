@@ -8,7 +8,6 @@ let add = document.getElementById("add");
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log("Button clicked");
     formValidation();
 })
 
@@ -43,13 +42,26 @@ let createDate = () => {
             <h6 class="card-subtitle mb-3 text-muted">${data.description}</h6>
             <h6 class="card-subtitle text-muted">${data.date}</h6>
             <div class="d-flex options justify-content-end">
-                <i class="fas fa-edit"></i>
-                <i class="fas fa-trash-alt"></i>
+                <i onClick="updateData(this)" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
+                <i onClick="deleteData(this)" class="fas fa-trash-alt"></i>
             </div>
         </div>
     </div>
     `
     resetForm();
+}
+
+let deleteData = (e) => {
+    e.parentElement.parentElement.parentElement.remove();
+}
+
+let updateData = (e) => {
+    let selectedTask = e.parentElement.parentElement.parentElement;
+    titleInput.value = selectedTask.children[0].children[0].innerHTML;
+    dateInput.value = selectedTask.children[0].children[2].innerHTML;
+    descInput.value = selectedTask.children[0].children[1].innerHTML;
+
+    selectedTask.remove();
 }
 
 let resetForm = () => {
