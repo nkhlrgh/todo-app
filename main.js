@@ -70,6 +70,8 @@ let deleteData = (e) => {
     localStorage.setItem("data", JSON.stringify(data));
     if(data.length == 0) {
         noTasks.innerHTML = "No tasks right now";
+    } else {
+        noTasks.innerHTML = "";
     }
 }
 
