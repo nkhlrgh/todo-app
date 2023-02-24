@@ -5,6 +5,7 @@ let descInput = document.getElementById("descInput");
 let error = document.getElementById("error");
 let mainCard = document.getElementById("mainCard");
 let add = document.getElementById("add");
+let noTasks = document.getElementById("no-tasks");
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -35,8 +36,7 @@ let acceptData = () => {
     });
 
     localStorage.setItem("data", JSON.stringify(data));
-
-    console.log(data);
+    noTasks.innerHTML = "";
     createDate();
 }
 
@@ -45,14 +45,16 @@ let createDate = () => {
     data.map((x, y) => {
         return (
             mainCard.innerHTML += `
-            <div id=${y} class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title mb-3">${x.title}</h5>
-                    <h6 class="card-subtitle mb-3 text-muted">${x.description}</h6>
-                    <h6 class="card-subtitle text-muted">${x.date}</h6>
-                    <div class="d-flex options justify-content-end">
-                        <i onClick="updateData(this)" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
-                        <i onClick="deleteData(this)" class="fas fa-trash-alt"></i>
+            <div class="col-md-6 col-lg-4">
+                <div id=${y} class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">${x.title}</h5>
+                        <h6 class="card-subtitle mb-3 text-muted">${x.description}</h6>
+                        <h6 class="card-subtitle text-muted">${x.date}</h6>
+                        <div class="d-flex options justify-content-end">
+                            <i onClick="updateData(this)" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
+                            <i onClick="deleteData(this)" class="fas fa-trash-alt"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,9 +65,12 @@ let createDate = () => {
 }
 
 let deleteData = (e) => {
-    e.parentElement.parentElement.parentElement.remove();
+    e.parentElement.parentElement.parentElement.parentElement.remove();
     data.splice(e.parentElement.parentElement.parentElement.id, 1);
     localStorage.setItem("data", JSON.stringify(data));
+    if(data.length == 0) {
+        noTasks.innerHTML = "No tasks right now";
+    }
 }
 
 let updateData = (e) => {
