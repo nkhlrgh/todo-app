@@ -1,9 +1,24 @@
+.main-wrapper {
+    padding-top: 30px;
+}
+
+.navbar {
+    box-shadow: 2px 2px 4px #c4c4c4;
+}
+
+.card {
+    transition: all 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 2px 2px 4px #c4c4c4;
+}
+
 #add-task {
     background-color: tomato;
     color: white;
-    padding: 10px;
-    margin-bottom: 10px;
-    align-items: center;
+    padding: 5px 10px;
+    align-items: baseline;
     gap: 10px;
     border: 1px solid tomato;
     border-radius: 8px;
@@ -27,4 +42,47 @@
     font-size: 12.5px;
     margin-top: 5px;
     margin-left: 5px;
+}
+
+.button-add {
+    background-color: tomato;
+    color: white;
+    font-weight: bold;
+}
+
+.button-add:hover {
+    background-color: tomato;
+    color: white;
+    box-shadow: 2px 2px 4px #c4c4c4;
+}
+
+.button-close {
+    background-color: white;
+    color: tomato;
+    border: 1px solid tomato;
+    font-weight: bold;
+}
+
+.button-close:hover {
+    background-color: white;
+    color: tomato;
+    border: 1px solid tomato;
+    font-weight: bold;
+    box-shadow: 2px 2px 4px #c4c4c4;
+}
+
+.btn-close:focus {
+    box-shadow: none;
+}
+
+input:focus {
+    outline: none !important;
+    box-shadow: 0 0 5px tomato !important;
+    border: 1px solid tomato !important;
+}
+
+textarea:focus {
+    outline: none !important;
+    box-shadow: 0 0 5px tomato !important;
+    border: 1px solid tomato !important;
 }
