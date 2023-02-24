@@ -25,34 +25,47 @@ let formValidation = () => {
     }
 }
 
-let data = {};
+let data = [];
 
 let acceptData = () => {
-    data["title"] = titleInput.value;
-    data["date"] = dateInput.value;
-    data["description"] = descInput.value;
+    data.push({
+        title: titleInput.value,
+        date: dateInput.value,
+        description: descInput.value,
+    });
+
+    localStorage.setItem("data", JSON.stringify(data));
+
+    console.log(data);
     createDate();
 }
 
 let createDate = () => {
-    mainCard.innerHTML += `
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title mb-3">${data.title}</h5>
-            <h6 class="card-subtitle mb-3 text-muted">${data.description}</h6>
-            <h6 class="card-subtitle text-muted">${data.date}</h6>
-            <div class="d-flex options justify-content-end">
-                <i onClick="updateData(this)" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
-                <i onClick="deleteData(this)" class="fas fa-trash-alt"></i>
+    mainCard.innerHTML = "";
+    data.map((x, y) => {
+        return (
+            mainCard.innerHTML += `
+            <div id=${y} class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">${x.title}</h5>
+                    <h6 class="card-subtitle mb-3 text-muted">${x.description}</h6>
+                    <h6 class="card-subtitle text-muted">${x.date}</h6>
+                    <div class="d-flex options justify-content-end">
+                        <i onClick="updateData(this)" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
+                        <i onClick="deleteData(this)" class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    `
+            `
+        );
+    })
     resetForm();
 }
 
 let deleteData = (e) => {
     e.parentElement.parentElement.parentElement.remove();
+    data.splice(e.parentElement.parentElement.parentElement.id, 1);
+    localStorage.setItem("data", JSON.stringify(data));
 }
 
 let updateData = (e) => {
@@ -61,7 +74,7 @@ let updateData = (e) => {
     dateInput.value = selectedTask.children[0].children[2].innerHTML;
     descInput.value = selectedTask.children[0].children[1].innerHTML;
 
-    selectedTask.remove();
+    deleteData(e);
 }
 
 let resetForm = () => {
@@ -69,3 +82,8 @@ let resetForm = () => {
     dateInput.value = "";
     descInput.value = "";
 }
+
+(() => {
+    data = JSON.parse(localStorage.getItem("data"));
+    createDate();
+})()
